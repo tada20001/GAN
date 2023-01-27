@@ -3,3 +3,4 @@ large_files/
 *.zip
 *.csv
 *.ipynb
+test.py
