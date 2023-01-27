@@ -2,7 +2,7 @@ from __future__ import print_function, division
 from builtins import range, input
 # Note: you may need to update your version of future 
 
-import util
+import unsupervised_class3.util as util
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.mixture import BayesianGaussianMixture
