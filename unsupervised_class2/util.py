@@ -3,7 +3,7 @@ from builtins import range
 
 import numpy as np
 import pandas as pd
-
+import os
 from sklearn.utils import shuffle
 
 def relu(x):
@@ -31,3 +31,27 @@ def init_weights(shape):
     w = np.random.randn(*shape) / np.sqrt(sum(shape))
     return w.astype(np.float32)
 
+
+
+from glob import glob
+from tqdm import tqdm
+from sklearn.utils import shuffle
+
+def get_mnist(limit=None):
+    if not os.path.exists('./large_files'):
+        print("You must create a folder called large_files adjacent to the class folder first")
+    if not os.path.exists('./large_files/train.csv'):
+        print("Looks like you haven't download the data or it's not in the right spot.")
+        print("Please get train.csv from https://www.kaggle.com/c/digit-recognizer")
+        print("and place it in the large_files folder.")
+
+    print("Reading in and transforming data ...")
+    df = pd.read_csv('./large_files/train.csv')
+    data = df.values
+    # np.random.shuffle(data)
+    X = data[:, 1:] / 255.0
+    Y = data[:, 0]
+    X, Y = shuffle(X, Y)
+    if limit is not None:
+        X, Y = X[:limit], Y[:limit]
+    return X, Y
